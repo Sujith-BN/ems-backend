@@ -21,7 +21,7 @@ public class EmployeeController {
 
 
     //Add an Employee -> Post Request
-    @PostMapping("/add")
+    @PostMapping("/employees")
     public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody EmployeeDTO employeeDto) {
         EmployeeDTO employeeDTO = employeeServiceImpl.addEmployee(employeeDto);
         return new ResponseEntity<>(employeeDTO, HttpStatus.CREATED);
@@ -29,7 +29,7 @@ public class EmployeeController {
 
 
     //Fetch Employee -> Get Request
-    @GetMapping("{id}")
+    @GetMapping("/employees/{id}")
     public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable  Long id) {
         EmployeeDTO employeeDTO = employeeServiceImpl.getEmployee(id);
         return ResponseEntity.ok(employeeDTO);
@@ -37,7 +37,7 @@ public class EmployeeController {
     }
 
     //Fetch all employees
-    @GetMapping("/All")
+    @GetMapping("/employees")
     public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
         return ResponseEntity.ok(employeeServiceImpl.getALLEmployees());
 
