@@ -9,19 +9,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ems/api/")
 
 @RequiredArgsConstructor
 public class EmployeeController {
 
-    private final EmployeeService  employeeService ;
+    private final EmployeeServiceImpl  employeeServiceImpl ;
 
 
     //Add an Employee -> Post Request
     @PostMapping("/add")
     public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody EmployeeDTO employeeDto) {
-        EmployeeDTO employeeDTO = employeeService.addEmployee(employeeDto);
+        EmployeeDTO employeeDTO = employeeServiceImpl.addEmployee(employeeDto);
         return new ResponseEntity<>(employeeDTO, HttpStatus.CREATED);
     }
 
@@ -29,10 +31,23 @@ public class EmployeeController {
     //Fetch Employee -> Get Request
     @GetMapping("{id}")
     public ResponseEntity<EmployeeDTO> getEmployee(@PathVariable  Long id) {
-        EmployeeDTO employeeDTO = employeeService.getEmployee(id);
+        EmployeeDTO employeeDTO = employeeServiceImpl.getEmployee(id);
         return ResponseEntity.ok(employeeDTO);
 
     }
+
+    //Fetch all employees
+    @GetMapping("/All")
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+        return ResponseEntity.ok(employeeServiceImpl.getALLEmployees());
+
+    }
+
+
+
+
+
+
 
 }
 
