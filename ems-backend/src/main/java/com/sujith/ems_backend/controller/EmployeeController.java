@@ -44,6 +44,13 @@ public class EmployeeController {
     }
 
 
+    //Delete employees by Id
+    @PostMapping("/employees/delete/{id}")
+    public String DeleteEmployee(@PathVariable Long id) {
+        return employeeServiceImpl.deleteEmployee(id);
+    }
+
+
 
 
 
