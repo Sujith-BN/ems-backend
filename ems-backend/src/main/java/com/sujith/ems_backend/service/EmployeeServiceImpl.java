@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,6 +43,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
         return "Deleted Employee with id "+id;
 }
+
+    @Override
+    public EmployeeDTO updateEmployee(Long id, EmployeeDTO employeedto) {
+
+        Employee emp = employeeRepository.findById(id).orElseThrow(()-> new RuntimeException("Employee not found with this id "+id));
+        emp.setFirstName(employeedto.getFirstName());
+        emp.setLastName(employeedto.getLastName());
+        emp.setEmail(employeedto.getEmail());
+        return Mapper.toEmployeeDTO(employeeRepository.save(emp));
+    }
 
 
 }

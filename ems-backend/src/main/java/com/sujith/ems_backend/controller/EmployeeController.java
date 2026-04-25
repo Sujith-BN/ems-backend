@@ -51,6 +51,11 @@ public class EmployeeController {
     }
 
 
+    //Update user
+    @PostMapping("/employee/update/{id}")
+    public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable Long id,@RequestBody EmployeeDTO employeeDTO) {
+        return ResponseEntity.ok(employeeServiceImpl.updateEmployee(id,employeeDTO));
+    }
 
 
 
